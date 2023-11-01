@@ -5,9 +5,9 @@
 #include<semaphore.h>
 #include<unistd.h>
 
-#define QUANTIDADE_ALUNOS 6
-#define QUANTIDADE_ALUNOS_TIPO_1 (2*QUANTIDADE_ALUNOS)/3
-#define QUANTIDADE_ALUNOS_TIPO_2 QUANTIDADE_ALUNOS/3
+#define QUANTIDADE_ALUNOS 9 // Quantidade de alunos
+#define QUANTIDADE_ALUNOS_TIPO_1 (2*QUANTIDADE_ALUNOS)/3// Quantidade de alunos do tipo 1
+#define QUANTIDADE_ALUNOS_TIPO_2 QUANTIDADE_ALUNOS/3// Quantidade de alunos do tipo 2
 
 pthread_t alunos_1[QUANTIDADE_ALUNOS_TIPO_1];
 pthread_t alunos_2[QUANTIDADE_ALUNOS_TIPO_2];
@@ -142,15 +142,14 @@ void* professor(void* args){
             pthread_cond_wait(&cadeira,&mutex_cadeira);     
         }
         pthread_mutex_unlock(&mutex_cadeira);
-        sleep(1);
+        entrega_para_o_professor++; 
         sem_post(&entrada_alunos_tipo_1);         
-        entrega_para_o_professor++;
         sleep(1);
-        sem_post(&entrada_alunos_tipo_2);
         entrega_para_o_professor++;
+        sem_post(&entrada_alunos_tipo_1);
         sleep(1);
+        entrega_para_o_professor++;
         sem_post(&entrada_alunos_tipo_2);         
-        entrega_para_o_professor++;
         if (entrega_para_o_professor==QUANTIDADE_ALUNOS){
             getchar();
             filanizarEntrega();
