@@ -116,7 +116,7 @@ void*aluno_tipo_2(void*args){
     finalizar_atividades++;
     pthread_mutex_unlock(&mutex_decremento);
     if (finalizar_atividades<QUANTIDADE_ALUNOS){
-        sem_wait(&entrada_alunos_tipo_1);
+        sem_wait(&entrada_alunos_tipo_2);
     }
     if (finalizar_atividades==QUANTIDADE_ALUNOS){
         pthread_cond_signal(&cadeira);
@@ -142,14 +142,19 @@ void* professor(void* args){
             pthread_cond_wait(&cadeira,&mutex_cadeira);     
         }
         pthread_mutex_unlock(&mutex_cadeira);
+        
         entrega_para_o_professor++; 
         sem_post(&entrada_alunos_tipo_1);         
         sleep(1);
+
+        entrega_para_o_professor++;
+        sem_post(&entrada_alunos_tipo_2);         
+        sleep(1);
+        
         entrega_para_o_professor++;
         sem_post(&entrada_alunos_tipo_1);
         sleep(1);
-        entrega_para_o_professor++;
-        sem_post(&entrada_alunos_tipo_2);         
+
         if (entrega_para_o_professor==QUANTIDADE_ALUNOS){
             getchar();
             filanizarEntrega();
