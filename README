@@ -1,0 +1,10 @@
+Projeto 1 de Sistema Operacional: Problema de sincronização
+
+Nesse Projeto estamos tentando resolver um problema de sincronização,
+Proposto pelo professor de sistemas Operacional, para resolver percebemos diversas
+abordagens para resolver, adotei politica a da espera de todos os alunos finalizarem as atvidades
+para liberar os alunos para entrar na sala, contudo um outra abordagem pode
+ser adotada é de quando três alunos, dois do tipo 1 e um do tipo dois a theread professor pode liberar um grupo,
+mas essa abordagem não foi adotada
+
+Foi realizado teste com numero de alunos 3,12,6,9,15,18,21,30
